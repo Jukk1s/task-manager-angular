@@ -1,0 +1,16 @@
+<head>
+    <title>Task List</title>
+</head>
+<body>
+    <h1>Task List</h1>
+
+    <ul id="task-list">
+        <li *ngFor="let task of tasks">
+            <span>{{ task.name }}</span>
+            <span>{{ task.priority }}</span>
+            <span>{{ task.completed ? 'Completed' : 'Not Completed' }}</span>
+          </li>
+    </ul>
+
+
+</body>
