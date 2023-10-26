@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
+import {MatTableModule} from '@angular/material/table';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +24,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     MatIconModule,
     MatToolbarModule,
     FormsModule,
+    MatTableModule,
     AppRoutingModule
   ],
   providers: [],

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import { TaskService } from '../services/task.service';
 import { Task } from '../models/task.model'
 
@@ -8,14 +8,13 @@ import { Task } from '../models/task.model'
   styleUrls: ['./task-form.component.css']
 })
 export class TaskFormComponent {
-  
+  @Output() taskAdded: EventEmitter<void> = new EventEmitter();
   taskName: string = '';
   priority: 'low' | 'medium' | 'high' = 'low';
 
   constructor(private taskService: TaskService) {}
   
   onSubmit() {
-
     const newTask: Task = {
       name: this.taskName,
       priority: this.priority,
@@ -23,6 +22,7 @@ export class TaskFormComponent {
     };
     
     this.taskService.addTask(newTask);
+    this.taskAdded.emit();
 
   }
 }
