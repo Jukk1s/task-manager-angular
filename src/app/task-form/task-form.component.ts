@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import { TaskService } from '../services/task.service';
 import { Task } from '../models/task.model'
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-task-form',
@@ -16,12 +17,13 @@ export class TaskFormComponent {
   
   onSubmit() {
     const newTask: Task = {
+      id: uuidv4(),
       name: this.taskName,
       priority: this.priority,
-      completed: false,
+      completed: 'notStarted',
     };
     
-    this.taskService.addTask(newTask);
+    this.taskService.saveTasksToLocalStorage(newTask);
     this.taskAdded.emit();
 
   }
