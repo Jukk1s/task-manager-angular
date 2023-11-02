@@ -11,12 +11,12 @@ export class TaskService {
 
   private tasksUpdatedSource = new BehaviorSubject<Task[]>([]);
   tasksUpdated$ = this.tasksUpdatedSource.asObservable();
+
   constructor(private localStorageService: LocalStorageService) {
     this.loadTasksFromLocalStorage();
   }
 
   loadTasksFromLocalStorage(): Task[] {
-    console.log("loadTasksFromLocalStorage")
     const data = this.localStorageService.getTaskData();
     if (data) {
       this.tasks = data;
@@ -26,20 +26,27 @@ export class TaskService {
 
   saveTasksToLocalStorage(task: Task) {
     this.tasks.push(task);
-    for (let i = 0 ; i < this.tasks.length ; i++) {
-      console.log(JSON.stringify(this.tasks[i]));
-    }
     this.localStorageService.saveTaskData(this.tasks);
     this.tasksUpdatedSource.next(this.tasks);
   }
 
   updateCompletion(id: string, status: any) {
     const taskToUpdate = this.tasks.find((task) => task.id === id);
-
     if (taskToUpdate) {
       taskToUpdate.completed = status;
     } else {
       console.error(`Task with ID ${id} not found.`);
     }
+    this.localStorageService.saveTaskData(this.tasks);
   }
+
+  deleteTask(id: string) {
+    const taskIndex = this.tasks.findIndex((task: Task) => task.id === id);
+    if (taskIndex !== -1) {
+      this.tasks.splice(taskIndex, 1);
+    }
+    this.localStorageService.saveTaskData(this.tasks);
+    this.tasksUpdatedSource.next(this.tasks);
+  }
+
 }

@@ -19,7 +19,7 @@ export class TaskListComponent implements OnInit {
 
   tasks: Task[] = [];
   dataSource = new MatTableDataSource<Task>();
-  displayedColumns: string[] = ['name', 'priority', 'completed'];
+  displayedColumns: string[] = ['name', 'priority', 'completed', 'delete'];
 
   completedOptions: completedOption[] = [
     { value: 'completed', viewValue: 'Completed'},
@@ -44,7 +44,10 @@ export class TaskListComponent implements OnInit {
   onSelectCompletionChange(event: any, taskId: string) {
     const selectedValue = event.value;
     this.taskService.updateCompletion(taskId, selectedValue);
+  }
 
+  onDeleteTask(taskId: string) {
+    this.taskService.deleteTask(taskId);
   }
 
 }
