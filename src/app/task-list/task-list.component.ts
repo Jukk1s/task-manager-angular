@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../services/task.service';
 import { Task } from '../models/task.model';
 import { MatTableDataSource } from '@angular/material/table';
-import { TaskFormComponent } from '../task-form/task-form.component';
-import { LocalStorageService } from '../services/local-storage.service';
 
-interface completedOption {
+interface option {
   value: string;
   viewValue: string;
 }
@@ -19,9 +17,15 @@ export class TaskListComponent implements OnInit {
 
   tasks: Task[] = [];
   dataSource = new MatTableDataSource<Task>();
-  displayedColumns: string[] = ['name', 'priority', 'completed', 'delete'];
+  displayedColumns: string[] = ['description', 'priority', 'completed', 'delete'];
 
-  completedOptions: completedOption[] = [
+  priorityOptions: option[] = [
+    { value: 'high', viewValue: 'High'},
+    { value: 'medium', viewValue: 'Medium'},
+    { value: 'low', viewValue: 'Low'},
+  ];
+
+  completedOptions: option[] = [
     { value: 'completed', viewValue: 'Completed'},
     { value: 'inProgress', viewValue: 'In Progress'},
     { value: 'notStarted', viewValue: 'Not Started'},
@@ -39,6 +43,19 @@ export class TaskListComponent implements OnInit {
   getTasks() {
     this.tasks = this.taskService.loadTasksFromLocalStorage();
     this.dataSource.data = this.tasks;
+  }
+
+  onDescriptionChange(desc: string, taskId: string) {
+    const activeElement = document.activeElement as HTMLElement;
+    if (activeElement) {
+      activeElement.blur();
+    }
+    this.taskService.updateDescription(taskId, desc);
+  }
+
+  onSelectPriorityChange(event: any, taskId: string) {
+    const selectedValue = event.value;
+    this.taskService.updatePriority(taskId, selectedValue);
   }
 
   onSelectCompletionChange(event: any, taskId: string) {

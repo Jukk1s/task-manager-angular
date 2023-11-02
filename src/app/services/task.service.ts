@@ -7,6 +7,7 @@ import { LocalStorageService } from './local-storage.service';
   providedIn: 'root'
 })
 export class TaskService {
+  
   private tasks: Task[] = [];
 
   private tasksUpdatedSource = new BehaviorSubject<Task[]>([]);
@@ -30,10 +31,30 @@ export class TaskService {
     this.tasksUpdatedSource.next(this.tasks);
   }
 
-  updateCompletion(id: string, status: any) {
+  updateDescription(id: string, newDescription: string) {
     const taskToUpdate = this.tasks.find((task) => task.id === id);
     if (taskToUpdate) {
-      taskToUpdate.completed = status;
+      taskToUpdate.description = newDescription;
+    } else {
+      console.error(`Task with ID ${id} not found.`);
+    }
+    this.localStorageService.saveTaskData(this.tasks);
+  }
+
+  updatePriority(id: string, newPriority: 'high' | 'medium' | 'low') {
+    const taskToUpdate = this.tasks.find((task) => task.id === id);
+    if (taskToUpdate) {
+      taskToUpdate.priority = newPriority;
+    } else {
+      console.error(`Task with ID ${id} not found.`);
+    }
+    this.localStorageService.saveTaskData(this.tasks);
+  }
+
+  updateCompletion(id: string, newStatus: 'completed' | 'inProgress' | 'notStarted') {
+    const taskToUpdate = this.tasks.find((task) => task.id === id);
+    if (taskToUpdate) {
+      taskToUpdate.completed = newStatus;
     } else {
       console.error(`Task with ID ${id} not found.`);
     }

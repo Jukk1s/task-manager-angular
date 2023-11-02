@@ -18,7 +18,7 @@ export class TaskFormComponent {
   onSubmit() {
     const newTask: Task = {
       id: uuidv4(),
-      name: this.taskName,
+      description: this.taskName,
       priority: this.priority,
       completed: 'notStarted',
     };
