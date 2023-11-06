@@ -1,0 +1,43 @@
+#container {
+    margin-top: 8%;
+    margin-left: 3%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1%;
+    line-height: 1.6;
+}
+
+
+label {
+    color: whitesmoke;
+    font-size: large;
+}
+
+#description-input {
+    font-size: 130%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    width: 44%;
+    height: 60px;
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+
+#priority-select {
+    text-align: center;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    width: 106px;
+    height: 40px;
+    font-size: 110%;
+}
+
+#submit-button {
+    font-size: 150%;
+    font-weight: bold;
+    margin-top: 2%;
+    width: 116px;
+    height: 54px;
+}
