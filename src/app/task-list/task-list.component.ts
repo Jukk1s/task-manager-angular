@@ -71,4 +71,30 @@ export class TaskListComponent implements OnInit {
     this.taskService.deleteTask(taskId);
   }
 
+  getPriorityClass(priority: string): string {
+    switch (priority) {
+      case 'low':
+        return 'green-text';
+      case 'medium':
+        return 'yellow-text';
+      case 'high':
+        return 'red-text';
+      default:
+        return '';
+    }
+  }
+
+  getCompletedClass(completed: string): string {
+    switch (completed) {
+      case 'completed':
+        return 'green-text';
+      case 'inProgress':
+        return 'yellow-text';
+      case 'notStarted':
+        return 'red-text';
+      default:
+        return '';
+    }
+  }
+
 }
