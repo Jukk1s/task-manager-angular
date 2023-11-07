@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TaskService } from '../services/task.service';
 import { Task } from '../models/task.model';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 
 interface option {
   value: string;
@@ -14,10 +15,11 @@ interface option {
   styleUrls: ['./task-list.component.css']
 })
 export class TaskListComponent implements OnInit {
-
   tasks: Task[] = [];
   dataSource = new MatTableDataSource<Task>();
   displayedColumns: string[] = ['description', 'priority', 'completed', 'delete'];
+
+  @ViewChild(MatSort, { static: true }) sort: MatSort = new MatSort();
 
   priorityOptions: option[] = [
     { value: 'high', viewValue: 'High'},
@@ -35,8 +37,10 @@ export class TaskListComponent implements OnInit {
 
   ngOnInit() {
     this.getTasks();
+    this.dataSource.sort = this.sort;
     this.taskService.tasksUpdated$.subscribe(() => {
       this.getTasks();
+      this.dataSource.sort = this.sort;
     });
   }
 

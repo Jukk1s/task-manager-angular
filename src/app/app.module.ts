@@ -4,6 +4,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule} from '@angular/material/input'
@@ -32,6 +33,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     MatToolbarModule,
     FormsModule,
     MatTableModule,
+    MatSortModule,
     MatButtonModule,
     MatSelectModule,
     MatInputModule,
