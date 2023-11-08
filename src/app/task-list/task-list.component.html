@@ -1,8 +1,5 @@
-<head>
-    <title>Task List</title>
-</head>
-<body>
 
+<body *ngIf="hasTasks">
     <table id="table" mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
         <ng-container matColumnDef="description">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
@@ -49,5 +46,4 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-
 </body>

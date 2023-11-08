@@ -20,6 +20,7 @@ interface option {
  */
 export class TaskListComponent implements OnInit {
   tasks: Task[] = [];
+  hasTasks: boolean = false;
   dataSource = new MatTableDataSource<Task>();
   displayedColumns: string[] = ['description', 'priority', 'completed', 'delete'];
 
@@ -44,16 +45,21 @@ export class TaskListComponent implements OnInit {
    */
   ngOnInit() {
     this.getTasks();
-    this.dataSource.sort = this.sort;
+    
     this.taskService.tasksUpdated$.subscribe(() => {
       this.getTasks();
-      this.dataSource.sort = this.sort;
     });
   }
 
   getTasks() {
     this.tasks = this.taskService.loadTasksFromLocalStorage();
+    if (this.tasks.length > 0) {
+      this.hasTasks = true;
+    } else {
+      this.hasTasks = false;
+    }
     this.dataSource.data = this.tasks;
+    this.dataSource.sort = this.sort;
   }
 
   /**

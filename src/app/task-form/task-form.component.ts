@@ -29,8 +29,8 @@ export class TaskFormComponent {
       priority: this.priority,
       completed: 'notStarted',
     };
-    
     this.taskService.saveTasksToLocalStorage(newTask);
     this.taskAdded.emit();
+    this.taskName = '';
   }
 }
