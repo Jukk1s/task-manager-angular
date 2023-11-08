@@ -1,6 +1,5 @@
-
-<body *ngIf="hasTasks">
-    <table id="table" mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+<body>
+    <table id="table" mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort [class.hidden]="!hasTasks">
         <ng-container matColumnDef="description">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
             <td mat-cell *matCellDef="let task">

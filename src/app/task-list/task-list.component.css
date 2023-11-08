@@ -6,6 +6,10 @@ th {
     color: whitesmoke;
 }
 
+.hidden {
+    display: none;
+}
+
 .green-text {
     color: #107d1f
 }

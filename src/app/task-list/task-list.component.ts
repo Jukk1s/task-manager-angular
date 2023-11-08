@@ -45,9 +45,10 @@ export class TaskListComponent implements OnInit {
    */
   ngOnInit() {
     this.getTasks();
-    
+    this.dataSource.sort = this.sort;
     this.taskService.tasksUpdated$.subscribe(() => {
       this.getTasks();
+      this.dataSource.sort = this.sort;
     });
   }
 
@@ -59,7 +60,6 @@ export class TaskListComponent implements OnInit {
       this.hasTasks = false;
     }
     this.dataSource.data = this.tasks;
-    this.dataSource.sort = this.sort;
   }
 
   /**
