@@ -7,23 +7,29 @@ th {
 }
 
 .green-text {
-    color: #107d1f !important
+    color: #107d1f
 }
   
 .yellow-text {
-    color: #c78904 !important
+    color: #c78904
 }
   
 .red-text {
-    color: #DC143C !important
+    color: #DC143C
 }
 
 mat-select, mat-option {
     font-weight: bolder
 }
 
-.mat-option.mat-selected {
-    --mat-option-selected-state-label-text-color-low: #00FF00;    /* Green for low priority */
-    --mat-option-selected-state-label-text-color-medium: #FFFF00; /* Yellow for medium priority */
-    --mat-option-selected-state-label-text-color-high: #FF0000;   /* Red for high priority */
+.green-text.mat-mdc-option-active {
+    --mat-option-selected-state-label-text-color: #107d1f
   }
+  
+.yellow-text.mat-mdc-option-active {
+    --mat-option-selected-state-label-text-color: #c78904
+}
+
+.red-text.mat-mdc-option-active {
+    --mat-option-selected-state-label-text-color: #DC143C
+}
