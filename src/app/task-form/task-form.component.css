@@ -40,4 +40,6 @@ label {
     margin-top: 2%;
     width: 116px;
     height: 54px;
+    background-color: whitesmoke;
+    cursor: pointer;
 }
