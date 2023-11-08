@@ -14,6 +14,10 @@ interface option {
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.css']
 })
+
+/**
+ * @class TaskListComponent displays the list of tasks in a table format and provides functionality to interact with and manage these tasks.
+ */
 export class TaskListComponent implements OnInit {
   tasks: Task[] = [];
   dataSource = new MatTableDataSource<Task>();
@@ -35,6 +39,9 @@ export class TaskListComponent implements OnInit {
 
   constructor(private taskService: TaskService) {}
 
+   /**
+   * Initializes the component, retrieves tasks from local storage, and sets up sorting for the table.
+   */
   ngOnInit() {
     this.getTasks();
     this.dataSource.sort = this.sort;
@@ -49,6 +56,11 @@ export class TaskListComponent implements OnInit {
     this.dataSource.data = this.tasks;
   }
 
+  /**
+   * Handles the change of a task's description, saves the new description, and removes focus from the component.
+   * @param desc - The new description.
+   * @param taskId - ID of the task.
+   */
   onDescriptionChange(desc: string, taskId: string) {
     const activeElement = document.activeElement as HTMLElement;
     if (activeElement) {
@@ -57,11 +69,21 @@ export class TaskListComponent implements OnInit {
     this.taskService.updateDescription(taskId, desc);
   }
 
+  /**
+   * Handles the change of a task's priority.
+   * @param event - Event.
+   * @param taskId - The ID of the task.
+   */
   onSelectPriorityChange(event: any, taskId: string) {
     const selectedValue = event.value;
     this.taskService.updatePriority(taskId, selectedValue);
   }
 
+  /**
+   * Handles the change of a task's completion state.
+   * @param event - Event.
+   * @param taskId - The ID of the task.
+   */
   onSelectCompletionChange(event: any, taskId: string) {
     const selectedValue = event.value;
     this.taskService.updateCompletion(taskId, selectedValue);
@@ -71,6 +93,11 @@ export class TaskListComponent implements OnInit {
     this.taskService.deleteTask(taskId);
   }
 
+  /**
+   * Converts a task's priority state to a CSS class.
+   * @param priority - The task priority.
+   * @returns - The corresponding CSS class.
+   */
   getPriorityClass(priority: string): string {
     switch (priority) {
       case 'low':
@@ -84,6 +111,11 @@ export class TaskListComponent implements OnInit {
     }
   }
 
+  /**
+   * Converts a task's completion state to a CSS class.
+   * @param completed - The task's completion level.
+   * @returns - The corresponding CSS class.
+   */
   getCompletedClass(completed: string): string {
     switch (completed) {
       case 'completed':
@@ -96,5 +128,4 @@ export class TaskListComponent implements OnInit {
         return '';
     }
   }
-
 }

@@ -8,6 +8,10 @@ import { v4 as uuidv4 } from 'uuid';
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.css']
 })
+
+/**
+ * @class TaskFormComponent represents a user interface component for creating new tasks.
+ */
 export class TaskFormComponent {
   @Output() taskAdded: EventEmitter<void> = new EventEmitter();
   taskName: string = '';
@@ -15,6 +19,9 @@ export class TaskFormComponent {
 
   constructor(private taskService: TaskService) {}
   
+  /**
+   * Saves the new task, and notifies listener functions that a new task has been added.
+   */
   onSubmit() {
     const newTask: Task = {
       id: uuidv4(),
@@ -25,6 +32,5 @@ export class TaskFormComponent {
     
     this.taskService.saveTasksToLocalStorage(newTask);
     this.taskAdded.emit();
-
   }
 }
